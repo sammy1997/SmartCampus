@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/wallet_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/contact"
+            android:title="Contact" />
+        <item
+            android:id="@+id/nav_developers"
+            android:icon="@drawable/programming"
+            android:title="Developers" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/exit"
+            android:title="Logout" />
+    </group>
+
+    <item android:title="Upcoming">
+        <menu>
+            <item
+                android:id="@+id/nav_s9"
+                android:icon="@drawable/calendar"
+                android:title="S9" />
+            <item
+                android:id="@+id/nav_anc"
+                android:icon="@drawable/calendar"
+                android:title="ANC" />
+        </menu>
+    </item>
+</menu>
