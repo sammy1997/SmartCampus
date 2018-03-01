@@ -39,6 +39,15 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/refresh" />
 
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="50dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:padding="12dp"
+            android:src="@drawable/menu_icon"
+            />
     </RelativeLayout>
 
 </FrameLayout>

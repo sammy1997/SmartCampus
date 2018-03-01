@@ -55,7 +55,6 @@ public class WalletHomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    List<String> data;
     List<Transaction> transactions;
     DatabaseReference reference;
     SimpleDateFormat format;
@@ -94,7 +93,6 @@ public class WalletHomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         addMoney = view.findViewById(R.id.add_money);
         database = FirebaseDatabase.getInstance();
-        data = new ArrayList<>();
         transactions = new ArrayList<>();
         getData();
         layoutManager = new LinearLayoutManager(this.getActivity());

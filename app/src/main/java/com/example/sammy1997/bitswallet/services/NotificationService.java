@@ -6,6 +6,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -44,10 +46,14 @@ public class NotificationService extends Service {
                 try {
                     boolean cancelled = Boolean.valueOf(dataSnapshot.child("cancelled").getValue().toString());
                     boolean order_ready = Boolean.valueOf(dataSnapshot.child("order_ready").getValue().toString());
+                    boolean order_complete = Boolean.valueOf(dataSnapshot.child("order_complete").getValue().toString());
                     if (cancelled ){
                         createNotification("Your recent order got cancelled");
-                    }else if (order_ready){
-                        createNotification("Your recent order is now ready");
+                    }else if(order_complete){
+                        createNotification("Your recent order is now ready. Please collect it.");
+                    }
+                    else if (order_ready){
+                        createNotification("Your recent order is being processed.");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -112,11 +118,13 @@ public class NotificationService extends Service {
         Intent intent = new Intent(this, WalletActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Log.e("Notification","Called");
+        Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification n  = new Notification.Builder(this)
                 .setContentTitle("APOGEE Wallet")
                 .setContentText(message)
                 .setSmallIcon(R.drawable.pay_icon)
                 .setContentIntent(pIntent)
+                .setSound(sound)
                 .setAutoCancel(true)
                 .addAction(R.drawable.pay_icon, "View", pIntent).build();
 

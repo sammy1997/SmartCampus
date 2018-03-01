@@ -99,6 +99,9 @@ public class CartActivity extends AppCompatActivity implements BackPressedListen
         activity=this;
         placed = false;
 
+        LinearLayout navigation = findViewById(R.id.navigation);
+        navigation.setVisibility(View.GONE);
+
         database = FirebaseDatabase.getInstance();
         preferences = getApplicationContext().getSharedPreferences("details",MODE_PRIVATE);
         editor = preferences.edit();
@@ -202,6 +205,8 @@ public class CartActivity extends AppCompatActivity implements BackPressedListen
             }
         } catch (JSONException e) {
             cartFragment.stopProgressBar();
+            floatingActionButton.setEnabled(true);
+            floatingActionButton.setVisibility(View.VISIBLE);
             e.printStackTrace();
         }
     }
@@ -284,6 +289,8 @@ public class CartActivity extends AppCompatActivity implements BackPressedListen
     }
 
     void showPaymentFailure(int amount){
+        floatingActionButton.setEnabled(true);
+        floatingActionButton.setVisibility(View.VISIBLE);
         View failed = inflater.inflate(R.layout.payment_failed_layout,bottomSheetContents,false);
         bottomSheet.getLayoutParams().height =  Utils.dpToPx(450);
         bottomSheet.requestLayout();
@@ -349,7 +356,7 @@ public class CartActivity extends AppCompatActivity implements BackPressedListen
             }
         });
 
-
+        addMoneyButton.setVisibility(View.GONE);
         addMoneyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

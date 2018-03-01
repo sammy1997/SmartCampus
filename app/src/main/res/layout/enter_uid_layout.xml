@@ -25,7 +25,7 @@
         android:background="@drawable/amount_field"
         android:ems="4"
         android:inputType="text"
-        android:text="100"
+        android:text="f2016001"
         android:textAlignment="center"
         android:textColor="#fff"
         android:textSize="45dp" />

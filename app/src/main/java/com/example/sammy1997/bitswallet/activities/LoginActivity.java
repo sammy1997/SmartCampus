@@ -48,11 +48,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar = findViewById(R.id.progressBar6);
         preferences = getApplicationContext().getSharedPreferences("default",MODE_PRIVATE);
         editor = preferences.edit();
+        if (preferences.getBoolean("logged_in",false)){
+            Intent intent = new Intent(LoginActivity.this,WalletActivity.class);
+            startActivity(intent);
+        }
         SignInButton googleSignIn = findViewById(R.id.googleSignIn);
         googleSignIn.setOnClickListener(this);
         googleSignIn.setSize(SignInButton.SIZE_WIDE);
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com")
+                .requestIdToken("254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 

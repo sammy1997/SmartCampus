@@ -15,13 +15,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -38,14 +41,18 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.example.sammy1997.bitswallet.activities.LoginActivity;
 import com.example.sammy1997.bitswallet.activities.ShopActivity;
 import com.example.sammy1997.bitswallet.activities.WebViewActivity;
 import com.example.sammy1997.bitswallet.adapters.BilledItemsAdapter;
+import com.example.sammy1997.bitswallet.fragments.AboutFragment;
+import com.example.sammy1997.bitswallet.fragments.DevelopersFragment;
 import com.example.sammy1997.bitswallet.fragments.WalletEmptyFragment;
 import com.example.sammy1997.bitswallet.fragments.WalletHomeFragment;
 import com.example.sammy1997.bitswallet.fragments.WalletLoadFragment;
 import com.example.sammy1997.bitswallet.listners.AddMoneyButtonClickListener;
 import com.example.sammy1997.bitswallet.listners.BackPressedListener;
+import com.example.sammy1997.bitswallet.listners.CentralButtonRemoveListener;
 import com.example.sammy1997.bitswallet.listners.CloseBottomSheetListener;
 import com.example.sammy1997.bitswallet.listners.OnDataLoadedListner;
 import com.example.sammy1997.bitswallet.listners.OnReceiptItemClickListener;
@@ -58,6 +65,12 @@ import com.example.sammy1997.bitswallet.services.NotificationService;
 import com.example.sammy1997.bitswallet.utils.URLS;
 import com.example.sammy1997.bitswallet.utils.Utils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -75,7 +88,7 @@ import okhttp3.OkHttpClient;
 
 import static com.example.sammy1997.bitswallet.utils.Utils.userObject;
 
-public class WalletActivity extends FragmentActivity implements TransactionCompleteListener, CloseBottomSheetListener,
+public class WalletActivity extends FragmentActivity implements CentralButtonRemoveListener,NavigationView.OnNavigationItemSelectedListener, TransactionCompleteListener, CloseBottomSheetListener,
         OnDataLoadedListner, AddMoneyButtonClickListener,OnReceiptItemClickListener, BackPressedListener {
 
     boolean clicked;
@@ -120,7 +133,11 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
         super.onCreate(savedInstanceState);
         Log.e("In onCreate","called");
         setContentView(R.layout.layout_main_home);
-
+        drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        LinearLayout navigation = findViewById(R.id.navigation);
+        navigation.setVisibility(View.GONE);
         SharedPreferences prefs = getApplicationContext().getSharedPreferences("default", MODE_PRIVATE);
         Utils.username = prefs.getString("username", "");
         Utils.password = prefs.getString("password", "");
@@ -131,6 +148,7 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
                 . writeTimeout(120, TimeUnit.SECONDS)
                 .addNetworkInterceptor(new StethoInterceptor())
                 .build();
+
         AndroidNetworking.initialize(getApplicationContext(),okHttpClient);
         context=this;
         activity=this;
@@ -151,13 +169,14 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
                             startActivity(intent);
                             overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                         }
-                    }else if (flag_payment){
-                        Intent i = new Intent(activity, WebViewActivity.class);
-                        i.putExtra("url", url);
-                        startActivity(i);
-                        finish();
-                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
                     }
+//                    else if (flag_payment){
+//                        Intent i = new Intent(activity, WebViewActivity.class);
+//                        i.putExtra("url", url);
+//                        startActivity(i);
+//                        finish();
+//                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+//                    }
                 }
 
             }
@@ -237,73 +256,77 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
         payOrReceive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    View pay_receive = inflater.inflate(R.layout.transfer_receive_layout,
-                            bottomSheetContents, false);
-                    bottomSheet.getLayoutParams().height = Utils.dpToPx(400);
-                    bottomSheet.requestLayout();
-                    final ProgressBar progress = pay_receive.findViewById(R.id.progressBar4);
-                    TextView topText = pay_receive.findViewById(R.id.textView8);
-                    Button receiveButton = pay_receive.findViewById(R.id.receive_money);
-                    Button transferMoney = pay_receive.findViewById(R.id.transfer_money);
-                    topText.setTypeface(montSemiBoldItalic);
-                    receiveButton.setTypeface(montMedium);
-                    transferMoney.setTypeface(montMedium);
-                    bottomSheetContents.removeAllViews();
-                    bottomSheetContents.addView(pay_receive);
-                    if (sheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
-                        sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+            payOrReceiveFunc();
+            }
+        });
+    }
+
+    void payOrReceiveFunc(){
+        View pay_receive = inflater.inflate(R.layout.transfer_receive_layout,
+                bottomSheetContents, false);
+        bottomSheet.getLayoutParams().height = Utils.dpToPx(400);
+        bottomSheet.requestLayout();
+        final ProgressBar progress = pay_receive.findViewById(R.id.progressBar4);
+        TextView topText = pay_receive.findViewById(R.id.textView8);
+        Button receiveButton = pay_receive.findViewById(R.id.receive_money);
+        Button transferMoney = pay_receive.findViewById(R.id.transfer_money);
+        topText.setTypeface(montSemiBoldItalic);
+        receiveButton.setTypeface(montMedium);
+        transferMoney.setTypeface(montMedium);
+        bottomSheetContents.removeAllViews();
+        bottomSheetContents.addView(pay_receive);
+        if (sheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+
+        transferMoney.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadTransferOptions();
+            }
+        });
+
+        receiveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progress.setVisibility(View.VISIBLE);
+                View receiveMoney = inflater.inflate(R.layout.profile_qr_code_layout, bottomSheetContents, false);
+                bottomSheet.getLayoutParams().height =  Utils.dpToPx(420);
+                bottomSheet.requestLayout();
+                bottomSheetContents.removeAllViews();
+                bottomSheetContents.addView(receiveMoney);
+
+
+                ImageView qrCode = findViewById(R.id.qr_code);
+                String walletUID = preferences.getString("walletID","xx");
+                QRCodeWriter writer = new QRCodeWriter();
+                try {
+                    BitMatrix bitMatrix = writer.encode(walletUID, BarcodeFormat.QR_CODE, 512, 512);
+                    int width = bitMatrix.getWidth();
+                    int height = bitMatrix.getHeight();
+                    Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+                    for (int x = 0; x < width; x++) {
+                        for (int y = 0; y < height; y++) {
+                            bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                        }
                     }
+                    qrCode.setImageBitmap(bmp);
+                    progress.setVisibility(View.INVISIBLE);
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
 
-                    transferMoney.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            loadTransferOptions();
-                        }
-                    });
-
-                    receiveButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            progress.setVisibility(View.VISIBLE);
-                            View receiveMoney = inflater.inflate(R.layout.profile_qr_code_layout, bottomSheetContents, false);
-                            bottomSheet.getLayoutParams().height =  Utils.dpToPx(420);
-                            bottomSheet.requestLayout();
-                            bottomSheetContents.removeAllViews();
-                            bottomSheetContents.addView(receiveMoney);
+                TextView name = receiveMoney.findViewById(R.id.name);
+                TextView college = receiveMoney.findViewById(R.id.college);
+                TextView userId = receiveMoney.findViewById(R.id.id_user);
+                name.setTypeface(montBold);
+                name.setText(preferences.getString("name","N.A"));
+                college.setTypeface(montMedium);
+                college.setText(preferences.getString("college","N.A"));
+                userId.setTypeface(montMedium);
+                userId.setText("UID: " + preferences.getString("userid","N.A"));
 
 
-                            ImageView qrCode = findViewById(R.id.qr_code);
-                            String walletUID = preferences.getString("walletID","xx");
-                            QRCodeWriter writer = new QRCodeWriter();
-                            try {
-                                BitMatrix bitMatrix = writer.encode(walletUID, BarcodeFormat.QR_CODE, 512, 512);
-                                int width = bitMatrix.getWidth();
-                                int height = bitMatrix.getHeight();
-                                Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
-                                for (int x = 0; x < width; x++) {
-                                    for (int y = 0; y < height; y++) {
-                                        bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
-                                    }
-                                }
-                                qrCode.setImageBitmap(bmp);
-                                progress.setVisibility(View.INVISIBLE);
-                            } catch (WriterException e) {
-                                e.printStackTrace();
-                            }
-
-                            TextView name = receiveMoney.findViewById(R.id.name);
-                            TextView college = receiveMoney.findViewById(R.id.college);
-                            TextView userId = receiveMoney.findViewById(R.id.id_user);
-                            name.setTypeface(montBold);
-                            name.setText(preferences.getString("name","N.A"));
-                            college.setTypeface(montMedium);
-                            college.setText(preferences.getString("college","N.A"));
-                            userId.setTypeface(montMedium);
-                            userId.setText("UID: " + preferences.getString("userid","N.A"));
-
-
-                        }
-                    });
             }
         });
     }
@@ -414,6 +437,47 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
 
 
     }
+
+    void profileOpen(){
+        View receiveMoney = inflater.inflate(R.layout.profile_qr_code_layout, bottomSheetContents, false);
+        bottomSheet.getLayoutParams().height =  Utils.dpToPx(420);
+        bottomSheet.requestLayout();
+        bottomSheetContents.removeAllViews();
+        bottomSheetContents.addView(receiveMoney);
+        ImageView qrCode = findViewById(R.id.qr_code);
+        String walletUID = preferences.getString("walletID","xx");
+        QRCodeWriter writer = new QRCodeWriter();
+        try {
+            BitMatrix bitMatrix = writer.encode(walletUID, BarcodeFormat.QR_CODE, 512, 512);
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+                    bmp.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+            qrCode.setImageBitmap(bmp);
+
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        TextView name = receiveMoney.findViewById(R.id.name);
+        TextView college = receiveMoney.findViewById(R.id.college);
+        TextView userId = receiveMoney.findViewById(R.id.id_user);
+        name.setTypeface(montBold);
+        name.setText(preferences.getString("name","N.A"));
+        college.setTypeface(montMedium);
+        college.setText(preferences.getString("college","N.A"));
+        userId.setTypeface(montMedium);
+        userId.setText("UID: " + preferences.getString("userid","N.A"));
+
+        if (sheetBehavior.getState() == BottomSheetBehavior.STATE_COLLAPSED){
+            sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
+    }
+
 
     void transferMoney(final String walletUID){
         View transferMoney = inflater.inflate(R.layout.pay_money, bottomSheetContents, false);
@@ -618,8 +682,9 @@ public class WalletActivity extends FragmentActivity implements TransactionCompl
         addMoneyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
-                addAmountRequest(Integer.valueOf(amount.getText().toString()),progressBar);
+//                progressBar.setVisibility(View.VISIBLE);
+//                addAmountRequest(Integer.valueOf(amount.getText().toString()),progressBar);
+                payOrReceiveFunc();
                 Log.e("Add Money",amount.getText().toString());
             }
         });
@@ -810,7 +875,7 @@ cancelOrder.setBackgroundResource(R.drawable.active_btn);
 
         ImageView closeOverlay = findViewById(R.id.close_btn);
         cancelOrder.setTypeface(montReg);
-
+        cancelOrder.setVisibility(View.INVISIBLE);
         RecyclerView billList = findViewById(R.id.billed_item_list);
         List<BillItem> bill;
         bill = getBillItems(transaction);
@@ -957,7 +1022,9 @@ cancelOrder.setBackgroundResource(R.drawable.active_btn);
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else if (getFragmentManager().getBackStackEntryCount() > 0) {
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
@@ -966,7 +1033,7 @@ cancelOrder.setBackgroundResource(R.drawable.active_btn);
 
 @Override
     public void onBackButtonFragment() {
-       super.onBackPressed();
+        drawer.openDrawer(GravityCompat.START);
     }
 
 
@@ -986,6 +1053,71 @@ cancelOrder.setBackgroundResource(R.drawable.active_btn);
     public void closeBottomSheetListener() {
         if (sheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED){
             sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawer.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()){
+            case R.id.nav_home:
+                WalletLoadFragment walletLoadFragment= new WalletLoadFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment,walletLoadFragment).commit();
+                break;
+            case R.id.nav_developers:
+                DevelopersFragment developersFragment = new DevelopersFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment,developersFragment).commit();
+                break;
+            case R.id.nav_about:
+                AboutFragment fragment = new AboutFragment();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment,fragment).commit();
+                break;
+            case R.id.nav_logout:
+                GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                        .requestIdToken("975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com")
+                        .requestEmail()
+                        .build();
+
+                GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this,googleSignInOptions);
+                if (GoogleSignIn.getLastSignedInAccount(this) != null) {
+                    googleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                        SharedPreferences.Editor logout = getApplicationContext().getSharedPreferences("default",MODE_PRIVATE).edit();
+                        logout.putBoolean("logged_in",false);
+                        logout.apply();
+                        Intent intent = new Intent(activity, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("Sign out Error :", e.getMessage());
+                        }
+                    });
+                }else {
+                    Toast.makeText(activity, "Some error occurred. Try again", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.nav_anc:
+            case R.id.nav_s9:
+                Toast.makeText(activity, "Upcoming feature", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        return true;
+    }
+
+    @Override
+    public void centralButtonRemoveListener(boolean remove) {
+        if (remove){
+            floatingActionButton.setVisibility(View.INVISIBLE);
+        }else {
+            floatingActionButton.setVisibility(View.VISIBLE);
         }
     }
 }

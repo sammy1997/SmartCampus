@@ -95,6 +95,9 @@ public class ShopActivity extends AppCompatActivity implements BackPressedListen
         context=this;
         activity=this;
 
+        LinearLayout navigation = findViewById(R.id.navigation);
+        navigation.setVisibility(View.GONE);
+
         database = FirebaseDatabase.getInstance();
         preferences = getApplicationContext().getSharedPreferences("details",MODE_PRIVATE);
         editor = preferences.edit();

@@ -16,6 +16,8 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.sammy1997.bitswallet.R;
+import com.example.sammy1997.bitswallet.listners.BackPressedListener;
+import com.example.sammy1997.bitswallet.listners.CentralButtonRemoveListener;
 import com.example.sammy1997.bitswallet.listners.OnDataLoadedListner;
 import com.example.sammy1997.bitswallet.models.Transaction;
 import com.example.sammy1997.bitswallet.utils.URLS;
@@ -33,8 +35,10 @@ import static com.example.sammy1997.bitswallet.utils.Utils.userObject;
 public class WalletLoadFragment extends Fragment {
 
     OnDataLoadedListner loadedListner;
+    CentralButtonRemoveListener removeListener;
     List<Transaction> data;
     SharedPreferences preferences;
+    BackPressedListener backPressedListener;
     SharedPreferences.Editor editor;
     ProgressBar progressBar;
     TextView tv;
@@ -57,8 +61,17 @@ public class WalletLoadFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet_load, container, false);
         progressBar = view.findViewById(R.id.progressBar);
+        removeListener.centralButtonRemoveListener(false);
         tv = view.findViewById(R.id.textView11);
         refresh = view.findViewById(R.id.refresh);
+        ImageView back = view.findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                backPressedListener.onBackButtonFragment();
+            }
+        });
+
         loadData();
         return view;
     }
@@ -69,6 +82,8 @@ public class WalletLoadFragment extends Fragment {
         super.onAttach(context);
 
         try{
+            backPressedListener = (BackPressedListener) context;
+            removeListener = (CentralButtonRemoveListener) context;
            loadedListner = (OnDataLoadedListner) context;
         }catch (ClassCastException e){
             throw new ClassCastException(context.toString() + " didn't implement onDataLoaded");
@@ -78,6 +93,8 @@ public class WalletLoadFragment extends Fragment {
     @Override
     public void onDetach() {
         loadedListner =null;
+        backPressedListener = null;
+        removeListener =null;
         super.onDetach();
     }
 

@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">BITS Wallet</string>
+    <string name="app_name">Smart Campus</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="transfer">Transfer</string>
     <string name="glow">Glow</string>
     <string name="scan">Scan</string>
     <string name="we_have_received_your_payment">We have received your payment.</string>
+    <string name="an_initiative_by_satyansh_rai">An initiative by Satyansh Rai</string>
+    <string name="about_us">Smart campus is an initiative to bring Digitalization in BITS Pilani, Pilani campus. \n\nWhat do we aim for? \n\nWe target smart facilities for the students at BITS Pilani. In its initial phase, we can order food from our room or anywhere in the campus without the hassle of carrying our ID card everywhere and every time. This will also nullify the waiting time for your orders.\n\n PROCEDURE:- \n\n1)Order items from the app. \n2)Order received by fk/looters. \n3)The user gets a notification about the start of preparation of the order. \n4)Another notification is sent to the user whenever the order is prepared and the user can collect it.\n\n MONEY TRANSFER AND BILL SPLIT:- \n\nWe have added a feature of splitting the bill between people. You can transfer the splitted amount to the other person\'s account, from within the app, who will place the order from his/her app. Suppose, you wish to have an item costing Rs.100 along with your friend.Splitting the bill concept works in the way that you pay Rs. 50 via Money transfer feature and your friend orders the item from his app. Finally, both you and your friend will be charged Rs. 50 from swd account.</string>
 </resources>

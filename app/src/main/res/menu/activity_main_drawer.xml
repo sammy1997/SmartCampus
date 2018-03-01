@@ -9,13 +9,10 @@
             android:icon="@drawable/wallet_home"
             android:title="Home" />
         <item
-            android:id="@+id/nav_contact"
-            android:icon="@drawable/contact"
-            android:title="Contact" />
-        <item
             android:id="@+id/nav_developers"
             android:icon="@drawable/programming"
             android:title="Developers" />
+
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/exit"
@@ -26,12 +23,20 @@
         <menu>
             <item
                 android:id="@+id/nav_s9"
-                android:icon="@drawable/calendar"
+                android:icon="@drawable/calender"
                 android:title="S9" />
             <item
                 android:id="@+id/nav_anc"
-                android:icon="@drawable/calendar"
+                android:icon="@drawable/calender"
                 android:title="ANC" />
+        </menu>
+    </item>
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/info"
+                android:title="About Us" />
         </menu>
     </item>
 </menu>

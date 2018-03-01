@@ -5,8 +5,8 @@ package com.example.sammy1997.bitswallet.utils;
  */
 
 public class URLS {
-    final public static String baseIP = "https://bits-apogee.org/2018/shop/";
-    //final public static String baseIP = "http://192.168.43.14:8000/shop/";
+//    final public static String baseIP = "https://bits-apogee.org/2018/shop/";
+    final public static String baseIP = "http://192.168.43.189:8000/shop/";
 //    public static String baseIP = "http://172.17.38.252:8000/shop/";
     public static String get_profile = baseIP + "get_profile/";
     public static String api_token = baseIP + "api_token/";

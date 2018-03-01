@@ -1,299 +1,21 @@
 {
   "project_info": {
-    "project_number": "975053221879",
-    "firebase_url": "https://vendorapp-80efa.firebaseio.com",
-    "project_id": "vendorapp-80efa",
-    "storage_bucket": "vendorapp-80efa.appspot.com"
+    "project_number": "254860780441",
+    "firebase_url": "https://smart-campus-ba95e.firebaseio.com",
+    "project_id": "smart-campus-ba95e",
+    "storage_bucket": "smart-campus-ba95e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:aa855be4cd69c96c",
-        "android_client_info": {
-          "package_name": "example.aditya.com.vendorapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:d179a99f9eb08d43",
-        "android_client_info": {
-          "package_name": "com.awesomecorp.sammy.apogeewallet"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-gu3vl0suluc449i0nhju82kh2ro0185q.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.awesomecorp.sammy.apogeewallet",
-            "certificate_hash": "5932190dd7ec0da36d20ef32bc2d5ded48df3be2"
-          }
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:221f1d2d261687dc",
-        "android_client_info": {
-          "package_name": "bitspilani.dvm.apogee2016"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-t7vuq5g544tnhja7mtv779bhp2af07av.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "bitspilani.dvm.apogee2016",
-            "certificate_hash": "96de43ad3b50c45418a3dda68431f2b54cf10bbc"
-          }
-        },
-        {
-          "client_id": "975053221879-o56ph7kgnak3r1c84v4s5tkvk566fplk.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "bitspilani.dvm.apogee2016",
-            "certificate_hash": "9f5e2d3f3f1892d53b04cb2b1123ed4e8bc64ced"
-          }
-        },
-        {
-          "client_id": "975053221879-qe3i3ii5oks6lv7mtrqchjrmi2iunkjh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "bitspilani.dvm.apogee2016",
-            "certificate_hash": "74309e31747af7f0a74fabfca7c043d5c043cbf3"
-          }
-        },
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:dadcfc3b2cb5ad8e",
-        "android_client_info": {
-          "package_name": "example.aditya.com.sms"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:af37da4ed95ecca9",
-        "android_client_info": {
-          "package_name": "org.dvm.bits_apogee"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:24c3c64a98737b7c",
-        "android_client_info": {
-          "package_name": "com.dvm.bits_apogee"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "975053221879-lkdm6k3riv25ar9umf9i4f2jhd5kfssh.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dvm.bits_apogee",
-            "certificate_hash": "1f9bd4e77c8428c40a4427b1ce93492a79d8678d"
-          }
-        },
-        {
-          "client_id": "975053221879-9le0ire8r5teb6k28p22lamjhrlieq84.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dvm.bits_apogee",
-            "certificate_hash": "9f5e2d3f3f1892d53b04cb2b1123ed4e8bc64ced"
-          }
-        },
-        {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:975053221879:android:5371a33720c5675a",
+        "mobilesdk_app_id": "1:254860780441:android:5371a33720c5675a",
         "android_client_info": {
           "package_name": "com.example.sammy1997.bitswallet"
         }
       },
       "oauth_client": [
         {
-          "client_id": "975053221879-6ne05ku0nke5j5jgue9vmb0c7tf5h8m5.apps.googleusercontent.com",
+          "client_id": "254860780441-g4r395p4boijnhdhvjccki3t7e4rmhl1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sammy1997.bitswallet",
@@ -301,17 +23,13 @@
           }
         },
         {
-          "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "975053221879-8sg918dag3h1v2fpemt5s1dh018cu8lr.apps.googleusercontent.com",
+          "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC80LSMSpogNopxvrwlw8rmrIw0hEI3Cok"
+          "current_key": "AIzaSyC8nh5cAGu3eewiw926NNfl6yRLCtBq-ag"
         }
       ],
       "services": {
@@ -322,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "975053221879-9dvv66a20imkc2f460pcepa41drds9nt.apps.googleusercontent.com",
+              "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -100,17 +100,17 @@ public class RecieptItemAdapter extends RecyclerView.Adapter<RecieptItemAdapter.
             Stall stall = transaction.getStallgroup();
             if (stall.isOrder_ready() && !stall.isOrder_complete() && !stall.isCancelled()){
                 holder.status.setBackgroundResource(R.drawable.circle_green);
-                holder.txtStatus.setText("ready");
+                holder.txtStatus.setText("Processing");
             }
             else if(stall.isOrder_complete()){
                 holder.status.setBackgroundResource(R.drawable.circle_red);
-                holder.txtStatus.setText("completed");
+                holder.txtStatus.setText("Ready");
             }else if(!stall.isOrder_complete() && !stall.isCancelled()){
                 holder.status.setBackgroundResource(R.drawable.circle_yellow);
-                holder.txtStatus.setText("pending");
+                holder.txtStatus.setText("Pending");
             }else if (stall.isCancelled()){
                 holder.status.setBackgroundResource(R.drawable.circle_red);
-                holder.txtStatus.setText("cancelled");
+                holder.txtStatus.setText("Cancelled");
             }
             holder.txtStall.setText(transaction.getStallgroup().getStallname());
             holder.txtCost.setText("INR " + transaction.getValue());
@@ -118,24 +118,24 @@ public class RecieptItemAdapter extends RecyclerView.Adapter<RecieptItemAdapter.
         }else if (type.equals("add")){
             holder.status.setBackgroundResource(R.drawable.circle_blue);
             holder.txtStall.setText("Added");
-            holder.txtStatus.setText("transaction");
+            holder.txtStatus.setText("Transaction");
             holder.txtCost.setText("INR " + transaction.getValue());
             holder.txtDate.setText( transaction.getCreated_at());
         }else if (type.equals("transfer")){
             holder.status.setBackgroundResource(R.drawable.circle_blue);
-            holder.txtStatus.setText("transaction");
+            holder.txtStatus.setText("Transaction");
             holder.txtStall.setText("Transferred");
             holder.txtCost.setText("INR " + transaction.getValue());
             holder.txtDate.setText( transaction.getCreated_at());
         }else if (type.equals("recieve")){
             holder.status.setBackgroundResource(R.drawable.circle_blue);
-            holder.txtStatus.setText("transaction");
+            holder.txtStatus.setText("Transaction");
             holder.txtStall.setText("Received");
             holder.txtCost.setText("INR " + transaction.getValue());
             holder.txtDate.setText( transaction.getCreated_at());
         }else if (type.equals("swd")){
             holder.status.setBackgroundResource(R.drawable.circle_blue);
-            holder.txtStatus.setText("swd");
+            holder.txtStatus.setText("Swd");
             holder.txtStall.setText("Added");
             holder.txtCost.setText("INR " + transaction.getValue());
             holder.txtDate.setText( transaction.getCreated_at());

@@ -3,7 +3,6 @@
     package="com.example.sammy1997.bitswallet">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -18,7 +17,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD1POP49bszPJuu3U3NYgeVqFp6NxMAPkk"/>
+            android:value="AIzaSyAL3hFZswkVOFI7nYbQdMfFsdjp4nrtXoo"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="39ba638084a61927d0bb4f8862e98eac26df7338" />
