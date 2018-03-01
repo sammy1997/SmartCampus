@@ -48,7 +48,8 @@
         <activity
             android:name=".activities.OrderPlaceIntermediateActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.LoginActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

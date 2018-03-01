@@ -3,10 +3,9 @@ package com.example.sammy1997.bitswallet.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -118,6 +117,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }catch (ApiException e){
             Log.e("Error", "signInResult:failed code=" + e.getStatusCode());
             Log.e("Error", "sdjsjdkl" + GoogleSignInStatusCodes.getStatusCodeString(e.getStatusCode()));
+            progressBar.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), "Error! Please try again", Toast.LENGTH_LONG).show();
         }
     }
@@ -144,11 +144,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             startActivity(intent);
                             finish();
                         } catch (JSONException e) {
+                            progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(getApplicationContext(), "Error! Please try again", Toast.LENGTH_LONG).show();
                             e.printStackTrace();
                         }
 
                     }else{
+                        progressBar.setVisibility(View.INVISIBLE);
                         Toast.makeText(getApplicationContext(), "Error! Please try again", Toast.LENGTH_LONG).show();
                     }
                 }
