@@ -2,6 +2,7 @@ package com.example.sammy1997.bitswallet.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -40,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     GoogleSignInClient googleSignInClient;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    Typeface muli;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +52,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar = findViewById(R.id.progressBar6);
         preferences = getApplicationContext().getSharedPreferences("default",MODE_PRIVATE);
         editor = preferences.edit();
+        muli =Typeface.createFromAsset(getAssets(),"fonts/Muli-Bold.ttf");
+        TextView tv1 = findViewById(R.id.textView23);
+        TextView tv2 = findViewById(R.id.textView24);
+        TextView tv3 = findViewById(R.id.textView25);
+        TextView tv4 = findViewById(R.id.textView26);
+        tv1.setTypeface(muli);
+        tv2.setTypeface(muli);
+        tv3.setTypeface(muli);
+        tv4.setTypeface(muli);
         if (preferences.getBoolean("logged_in",false)){
             Intent intent = new Intent(LoginActivity.this,WalletActivity.class);
             startActivity(intent);

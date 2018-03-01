@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
@@ -146,74 +147,81 @@ public class ItemsViewFragment extends Fragment {
         addToCartButtonListener = null;
     }
     void getItems(){
-        final String shopID = shop.getId();
-        JSONObject user = userObject();
-        progressBar.setVisibility(View.VISIBLE);
-        tv.setVisibility(View.INVISIBLE);
-        refresh.setVisibility(View.GONE);
-        AndroidNetworking.post(URLS.api_token).addJSONObjectBody(user).build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        String token = null;
-                        try {
-                            token = response.getString("token");
-                            Log.e("Token", token);
-                            AndroidNetworking.post(URLS.get_products+shopID).addJSONObjectBody(Utils.walletSecret())
-                                    .addHeaders("Authorization","JWT " + token).build().getAsJSONObject(new JSONObjectRequestListener() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    JSONArray products = null;
-                                    try {
-                                        products = response.getJSONArray("products");
-                                        header.setText(response.getJSONObject("stalls").getString("name"));
-                                        for (int i=0; i< products.length(); i++) {
-                                            JSONObject object = products.getJSONObject(i);
-                                            Item item = new Item();
-                                            item.setItemName(object.getString("name"));
-                                            item.setId(object.getString("id"));
-                                            item.setIs_available(object.getBoolean("is_available"));
-                                            item.setCost(object.getString("price"));
-                                            item.setColor(object.getString("colour"));
-                                            item.setSize(object.getString("size"));
-                                            if (item.isIs_available()){
-                                                items.add(item);
+        try {
+            final String shopID = shop.getId();
+
+            JSONObject user = userObject();
+            progressBar.setVisibility(View.VISIBLE);
+            tv.setVisibility(View.INVISIBLE);
+            refresh.setVisibility(View.GONE);
+            AndroidNetworking.post(URLS.api_token).addJSONObjectBody(user).build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            String token = null;
+                            try {
+                                token = response.getString("token");
+                                Log.e("Token", token);
+                                AndroidNetworking.post(URLS.get_products + shopID).addJSONObjectBody(Utils.walletSecret())
+                                        .addHeaders("Authorization", "JWT " + token).build().getAsJSONObject(new JSONObjectRequestListener() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        JSONArray products = null;
+                                        try {
+                                            products = response.getJSONArray("products");
+                                            header.setText(response.getJSONObject("stalls").getString("name"));
+                                            for (int i = 0; i < products.length(); i++) {
+                                                JSONObject object = products.getJSONObject(i);
+                                                Item item = new Item();
+                                                item.setItemName(object.getString("name"));
+                                                item.setId(object.getString("id"));
+                                                item.setIs_available(object.getBoolean("is_available"));
+                                                item.setCost(object.getString("price"));
+                                                item.setColor(object.getString("colour"));
+                                                item.setSize(object.getString("size"));
+                                                if (item.isIs_available()) {
+                                                    items.add(item);
+                                                }
                                             }
+
+                                            adapter = new ItemsAdapter(items, getActivity(), addToCartButtonListener);
+                                            recyclerView.setAdapter(adapter);
+                                            recyclerView.setVisibility(View.VISIBLE);
+                                            progressBar.setVisibility(View.INVISIBLE);
+
+                                        } catch (JSONException e) {
+                                            progressBar.setVisibility(View.INVISIBLE);
+                                            tv.setVisibility(View.VISIBLE);
+                                            refresh.setVisibility(View.VISIBLE);
+                                            e.printStackTrace();
                                         }
+                                    }
 
-                                        adapter = new ItemsAdapter(items, getActivity(), addToCartButtonListener);
-                                        recyclerView.setAdapter(adapter);
-                                        recyclerView.setVisibility(View.VISIBLE);
-                                        progressBar.setVisibility(View.INVISIBLE);
-
-                                    } catch (JSONException e) {
+                                    @Override
+                                    public void onError(ANError anError) {
                                         progressBar.setVisibility(View.INVISIBLE);
                                         tv.setVisibility(View.VISIBLE);
                                         refresh.setVisibility(View.VISIBLE);
-                                        e.printStackTrace();
                                     }
-                                }
+                                });
+                            } catch (JSONException e) {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                tv.setVisibility(View.VISIBLE);
+                                refresh.setVisibility(View.VISIBLE);
+                                e.printStackTrace();
+                            }
+                        }
 
-                                @Override
-                                public void onError(ANError anError) {
-                                    progressBar.setVisibility(View.INVISIBLE);
-                                    tv.setVisibility(View.VISIBLE);
-                                    refresh.setVisibility(View.VISIBLE);
-                                }
-                            });
-                        } catch (JSONException e) {
+                        @Override
+                        public void onError(ANError anError) {
                             progressBar.setVisibility(View.INVISIBLE);
                             tv.setVisibility(View.VISIBLE);
                             refresh.setVisibility(View.VISIBLE);
-                            e.printStackTrace();
                         }
-                    }
-                    @Override
-                    public void onError(ANError anError) {
-                        progressBar.setVisibility(View.INVISIBLE);
-                        tv.setVisibility(View.VISIBLE);
-                        refresh.setVisibility(View.VISIBLE);
-                    }
-                });
+                    });
+        }catch (Exception e){
+            e.printStackTrace();
+//            Toast.makeText(getContext(),"Press back again",Toast.LENGTH_SHORT).show();
+        }
     }
 }

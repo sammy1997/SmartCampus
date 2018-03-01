@@ -16,7 +16,7 @@ public class Utils {
     public static String dept[] = {"Student's Union", "Dept. of Visual Media" ,"Dept. of Visual Media" ,"Dept. of Visual Media" ,"Dept. of Visual Media" ,"Dept. of Visual Media" ,"Dept. of Visual Media" ,"Dept. of Visual Media", "Student's Union"};
     public static String role[] = {"Ideation and Initiative", "UI Design", "Android App Developer","Android App Developer", "Backend Developer", "Backend Developer","Android App Developer", "Vendor Portal Developer","UI Design"};
     public static String phone[] = {"9151178228","7688883918","9529179518","9829996855","9829799877","9694345679","7987431519","7718823969","9463961799"};
-    public static String email[] = {"f2016632@pilani.bits-pilani.ac.in","f2016727@pilani.bits-pilani.ac.in","f2016632@pilani.bits-pilani.ac.in","sombuddha2016@gmail.com","f2016036@pilani.bits-pilani.ac.in","f2016023@pilani.bits-pilani.ac.in","f2016038@pilani.bits-pilani.ac.in","f2016153@pilani.bits-pilani.ac.in","f2016472@pilani.bits-pilani.ac.in"};
+    public static String email[] = {"f2016632@pilani.bits-pilani.ac.in","f2016727@pilani.bits-pilani.ac.in","f2016081@pilani.bits-pilani.ac.in","sombuddha2016@gmail.com","f2016036@pilani.bits-pilani.ac.in","f2016023@pilani.bits-pilani.ac.in","f2016038@pilani.bits-pilani.ac.in","f2016153@pilani.bits-pilani.ac.in","f2016472@pilani.bits-pilani.ac.in"};
     public static String imageUrl[] = {"developers/satyansh.jpg","developers/madhur.jpg","developers/vaibhav.jpg","developers/sammy.jpg","developers/gujju.jpg","developers/tushar.jpg","developers/laddha.jpg","developers/ccd.jpg","developers/manav.jpg"};
     public static int dpToPx(int dp)
     {

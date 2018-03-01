@@ -205,6 +205,7 @@ public class WalletActivity extends FragmentActivity implements CentralButtonRem
             }
         });
         database = FirebaseDatabase.getInstance();
+
         preferences = getApplicationContext().getSharedPreferences("details",MODE_PRIVATE);
         editor = preferences.edit();
         setTypefaces();
