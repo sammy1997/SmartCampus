@@ -3,7 +3,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.sammy1997.bitswallet"
+        applicationId "com.dvm.bitswallet"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1

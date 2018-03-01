@@ -15,16 +15,16 @@
       },
       "oauth_client": [
         {
-          "client_id": "254860780441-g4r395p4boijnhdhvjccki3t7e4rmhl1.apps.googleusercontent.com",
+          "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "254860780441-vpk2256dalnl9sd2itku77qrkhk4krmt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.sammy1997.bitswallet",
             "certificate_hash": "b2b0180b8eb15358b24c4798d3b908f717c2f888"
           }
-        },
-        {
-          "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -44,6 +44,68 @@
               "client_type": 3
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254860780441:android:aa855be4cd69c96c",
+        "android_client_info": {
+          "package_name": "example.aditya.com.vendorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8nh5cAGu3eewiw926NNfl6yRLCtBq-ag"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:254860780441:android:a9cd2f0e58feab77",
+        "android_client_info": {
+          "package_name": "com.dvm.bitswallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "254860780441-ck9ic5sc6umemr0vrqod0jctq88c369s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8nh5cAGu3eewiw926NNfl6yRLCtBq-ag"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
