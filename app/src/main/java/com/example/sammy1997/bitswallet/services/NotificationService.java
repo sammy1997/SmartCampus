@@ -120,7 +120,7 @@ public class NotificationService extends Service {
         Log.e("Notification","Called");
         Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         Notification n  = new Notification.Builder(this)
-                .setContentTitle("APOGEE Wallet")
+                .setContentTitle("Smart Campus")
                 .setContentText(message)
                 .setSmallIcon(R.drawable.pay_icon)
                 .setContentIntent(pIntent)

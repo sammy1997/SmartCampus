@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("Login","Create");
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_login);
         progressBar = findViewById(R.id.progressBar6);
@@ -165,5 +166,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         }
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("Login","Start");
+    }
+
+    @Override
+    protected void onStop() {
+        Log.e("Login","Stop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("Login","Destroy");
+        super.onDestroy();
     }
 }
