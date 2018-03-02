@@ -64,6 +64,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (preferences.getBoolean("logged_in",false)){
             Intent intent = new Intent(LoginActivity.this,WalletActivity.class);
             startActivity(intent);
+            this.finish();
+            intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY);
         }
         SignInButton googleSignIn = findViewById(R.id.googleSignIn);
         googleSignIn.setOnClickListener(this);
